@@ -1,0 +1,20 @@
+{
+  "name": "med-decoder-public",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Public AI-powered medical lab report explainer with a protected admin console.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@google/genai": "2.4.0",
+    "dotenv": "17.2.3",
+    "express": "4.21.2",
+    "multer": "2.0.2"
+  }
+}

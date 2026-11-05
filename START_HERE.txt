@@ -1,0 +1,17 @@
+MED-DECODER — QUICK START
+
+1. Extract this ZIP.
+2. Open the extracted Med-Decoder folder in VS Code.
+3. Open Terminal in VS Code.
+4. Run: npm install
+5. Copy .env.example to .env
+   PowerShell: Copy-Item .env.example .env
+6. Open .env and add your Google Gemini API key, admin email, admin password and a random SESSION_SECRET.
+7. Run: npm run dev
+8. Public website: http://localhost:3000
+9. Admin portal: http://localhost:3000/admin
+
+Public users do not need to log in. Only the administrator signs in.
+
+Without GEMINI_API_KEY, the sample report works, but real document analysis and AI chat are disabled.
+See README.md for the full local test checklist and Render deployment instructions.

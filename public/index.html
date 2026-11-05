@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b615d" />
+  <meta name="description" content="Med-Decoder explains laboratory reports in simple English, Hindi and Marathi. Upload a PDF or image and understand the values in your report." />
+  <title>Med-Decoder — Understand your lab report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Med-Decoder home">
+      <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24"/><path d="M8.5 8.5l15 15m0-15-15 15" opacity=".35"/></svg></span>
+      <span>med<span class="brand-accent">decoder</span><small>Understand your health report</small></span>
+    </a>
+    <nav class="top-nav">
+      <a href="#how-it-works">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a class="admin-link" href="/admin">Admin <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse-dot"></span> SIMPLE HEALTH INFORMATION, IN YOUR LANGUAGE</span>
+        <h1>Your lab report,<br><em>explained simply.</em></h1>
+        <p class="hero-description">Upload a lab report and understand what each test means, which values are outside the lab's range, and what you can discuss with your doctor.</p>
+        <div class="hero-points">
+          <span><b>✓</b> No public account needed</span>
+          <span><b>✓</b> English · हिंदी · मराठी</span>
+          <span><b>✓</b> Doctor-discussion questions</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-cross">＋</div>
+        <div class="report-illustration">
+          <div class="report-top"><span class="mini-logo">✚</span><span>LABORATORY REPORT</span><span class="report-dots">•••</span></div>
+          <div class="report-line short"></div><div class="report-line"></div>
+          <div class="report-table"><span>TEST</span><span>RESULT</span><span>RANGE</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="report-note"><span>✓</span><div><b>Made easier to understand</b><small>Clear words · Helpful questions</small></div></div>
+        </div>
+        <div class="floating-chip chip-top">✦ AI report reading</div>
+        <div class="floating-chip chip-bottom">Aa हिंदी · मराठी</div>
+      </div>
+    </section>
+
+    <section class="upload-section section-wrap" id="upload-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">START HERE</span><h2>Decode your report</h2><p>Choose a clear photo or PDF of your laboratory report.</p></div>
+        <button id="sample-btn" class="button button-light" type="button"><span>✦</span> Try a sample report</button>
+      </div>
+      <form id="upload-form" class="upload-card">
+        <label class="drop-zone" id="drop-zone" for="report-file">
+          <input id="report-file" name="report" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt,.csv,application/pdf,image/jpeg,image/png,image/webp,text/plain,text/csv" />
+          <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16.5v2A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg></span>
+          <strong>Drop your report here</strong>
+          <span class="drop-sub">or <u>browse files</u> from your device</span>
+          <span class="format-pills"><i>PDF</i><i>JPG</i><i>PNG</i><i>WEBP</i><i>TXT</i><i>CSV</i></span>
+          <span class="file-limit">Maximum file size: 15 MB</span>
+        </label>
+        <div id="selected-file" class="selected-file hidden"><span class="file-symbol">PDF</span><div><b id="file-name">report.pdf</b><small id="file-meta">Ready to analyse</small></div><button id="remove-file" type="button" aria-label="Remove selected file">×</button></div>
+        <div class="upload-options">
+          <label class="language-field"><span>Explain my report in</span>
+            <select id="language-select" name="language"><option value="en">English</option><option value="hi">हिंदी (Hindi)</option><option value="mr">मराठी (Marathi)</option></select>
+          </label>
+          <div class="option-help">You can change the language before each report.</div>
+        </div>
+        <label class="consent-row"><input id="privacy-consent" type="checkbox" /><span>I understand that my file is sent to the AI service for reading. The original file is not saved; a de-identified analysis summary may be retained for up to 30 days for service review. <a href="#privacy">Read privacy details</a>.</span></label>
+        <button class="button button-primary analyze-button" id="analyze-btn" type="submit" disabled><span>✧</span> Analyse my report <span class="button-arrow">→</span></button>
+        <p class="form-note">Please hide personal details such as your name, phone number and patient ID before uploading.</p>
+      </form>
+      <div id="upload-error" class="alert alert-error hidden" role="alert"></div>
+      <div id="loading-state" class="loading-card hidden" aria-live="polite"><span class="loader"></span><div><b>Reading your report…</b><p>Checking the text, values and reference ranges. This can take a little time for large reports.</p></div></div>
+    </section>
+
+    <section id="results-section" class="results-section section-wrap hidden" aria-live="polite">
+      <div class="results-heading"><div><span class="eyebrow">YOUR REPORT EXPLAINED</span><h2 id="result-title">Your report summary</h2><p id="result-file-name"></p></div><div class="result-actions"><button id="new-report-btn" class="button button-light" type="button">← New report</button><button id="print-btn" class="button button-primary" type="button"><span>↓</span> Save as PDF</button></div></div>
+      <div class="confidence-banner"><div class="confidence-icon">✦</div><div class="confidence-copy"><b>AI reading confidence estimate</b><p>This is the AI's estimate of how clearly it read the document — it is <strong>not a clinically validated accuracy rate</strong>. Please verify every value against the original report.</p></div><div class="confidence-score"><strong id="confidence-number">—</strong><span>out of 100</span></div></div>
+      <div class="summary-card"><div class="summary-label"><span class="summary-icon">✧</span> IN SIMPLE WORDS</div><p id="report-summary"></p><ul id="key-findings" class="key-findings"></ul></div>
+      <div class="quick-stats" id="quick-stats"></div>
+      <div class="results-card"><div class="card-heading"><div><span class="eyebrow">TEST-BY-TEST VIEW</span><h3>What your numbers mean</h3></div><span class="status-legend"><i class="dot dot-high"></i> High <i class="dot dot-low"></i> Low <i class="dot dot-normal"></i> Within range <i class="dot dot-review"></i> Check</span></div>
+        <div class="table-scroll"><table class="results-table"><thead><tr><th>Test</th><th>Your result</th><th>Lab reference range</th><th>Status</th><th>Simple explanation</th></tr></thead><tbody id="test-rows"></tbody></table></div>
+        <p class="table-note">“High” and “Low” are calculated only from numerical ranges printed on your uploaded report. If a range could not be read, the result is marked “Check”.</p>
+      </div>
+      <div class="insight-grid"><section class="insight-card"><div class="insight-title"><span class="insight-icon amber">✦</span><div><h3>Points to discuss</h3><small>What may need a closer look</small></div></div><ul id="doctor-questions" class="question-list"></ul></section>
+        <section class="insight-card"><div class="insight-title"><span class="insight-icon blue">＋</span><div><h3>Questions about medicines</h3><small>Ask before starting or changing anything</small></div></div><ul id="medicine-questions" class="question-list"></ul></section>
+        <section class="insight-card"><div class="insight-title"><span class="insight-icon green">♡</span><div><h3>Diet and daily routine</h3><small>Discuss what is suitable for you</small></div></div><ul id="diet-questions" class="question-list"></ul></section>
+        <section class="insight-card"><div class="insight-title"><span class="insight-icon violet">↗</span><div><h3>Follow-up and next steps</h3><small>Plan the next conversation with your doctor</small></div></div><ul id="next-questions" class="question-list"></ul></section>
+      </div>
+      <section class="assistant-card" id="report-assistant"><div class="assistant-intro"><span class="assistant-avatar">✧</span><div><span class="eyebrow">REPORT SUPPORT</span><h3>Ask Med-Decoder AI</h3><p>Ask what a test means or ask for a simpler explanation of this report.</p></div></div><div id="report-chat-messages" class="chat-messages"><div class="chat-bubble assistant-bubble">Hello! I can explain the terms and values in this report. What would you like to understand?</div></div><form id="report-chat-form" class="chat-input-row"><input id="report-chat-input" maxlength="2000" placeholder="Ask a question about this report…" autocomplete="off"/><button class="button button-primary" type="submit">Send ↗</button></form></section>
+      <div id="limitations-box" class="limitations-box hidden"><b>What the AI could not confirm</b><ul id="limitations-list"></ul></div>
+      <div class="medical-notice"><span>ⓘ</span><p><b>Important:</b> Med-Decoder is an educational tool, not a doctor or diagnostic service. It cannot diagnose a condition or prescribe treatment. Share the original report with a qualified healthcare professional before making medical decisions.</p></div>
+    </section>
+
+    <section id="how-it-works" class="how-section section-wrap">
+      <div class="section-heading centered"><div><span class="eyebrow">SIMPLE BY DESIGN</span><h2>How it works</h2><p>Three clear steps. No account and no complicated setup.</p></div></div>
+      <div class="steps-grid"><article class="step-card"><span class="step-number">01</span><div class="step-visual upload-visual">↑</div><h3>Upload your report</h3><p>Choose a PDF, photo or supported text file from your phone or computer.</p></article><article class="step-card"><span class="step-number">02</span><div class="step-visual scan-visual">✧</div><h3>AI reads the values</h3><p>Med-Decoder extracts test values and compares them with ranges printed by the laboratory.</p></article><article class="step-card"><span class="step-number">03</span><div class="step-visual explain-visual">Aa</div><h3>Understand and discuss</h3><p>Get simple explanations, language support and useful questions for your doctor.</p></article></div>
+    </section>
+
+    <section class="privacy-section section-wrap" id="privacy"><div class="privacy-icon">♧</div><div><span class="eyebrow">YOUR DOCUMENTS</span><h2>A clear note about privacy</h2><p>Your original upload is processed in memory and is not saved on the website. A de-identified analysis result (test names, values, ranges and explanations) is stored for up to 30 days so the admin can monitor the service and review errors. The admin area is password-protected. Your report is also sent to Google Gemini for AI processing. Remove names, phone numbers, patient IDs and other personal details before uploading. Do not upload anyone else's report without their permission.</p></div></section>
+
+    <section class="bottom-cta section-wrap"><div><span class="eyebrow">A LITTLE MORE CLARITY</span><h2>Understand your report, one step at a time.</h2><p>Use the explanation to prepare for a better conversation with your healthcare professional.</p></div><a href="#upload-section" class="button button-white">Decode a report ↑</a></section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="/"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24"/></svg></span><span>med<span class="brand-accent">decoder</span><small>Understand your health report</small></span></a><p>Made to make medical language easier to understand. Not a replacement for professional medical advice.</p><a href="/admin">Admin access</a></footer>
+
+  <button id="support-toggle" class="support-toggle" type="button" aria-label="Open AI support">✧ <span>AI help</span></button>
+  <aside id="support-panel" class="support-panel hidden" aria-label="Med-Decoder AI support"><div class="support-header"><div><b>Med-Decoder AI</b><small>Website support and health literacy</small></div><button id="support-close" type="button" aria-label="Close">×</button></div><div id="support-messages" class="chat-messages"><div class="chat-bubble assistant-bubble">Hi! Need help using the website or understanding a general lab term? Ask me here.</div></div><form id="support-form" class="chat-input-row"><input id="support-input" maxlength="2000" placeholder="Type your question…" autocomplete="off"/><button type="submit" class="button button-primary">Send</button></form><p class="support-footnote">For questions about your own results, use the assistant shown with your analysed report.</p></aside>
+  <script src="/app.js" defer></script>
+</body>
+</html>
